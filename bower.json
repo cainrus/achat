@@ -1,0 +1,24 @@
+{
+  "name": "anonymchat",
+  "version": "0.0.0",
+  "authors": [
+    "Sergei Tarassov <cainrus@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendors",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.18",
+    "backbone": "~1.2.1",
+    "marionette": "~2.4.1",
+    "jquery-legacy": "jquery#^1",
+    "jquery-modern": "jquery#^2",
+    "socket.io-client": "~1.3.5"
+  }
+}
