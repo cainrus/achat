@@ -17,18 +17,22 @@ var config = {
 
 };
 
-var config2 = require('./configs/require.config');
-config2.baseDir = '/public/javascripts';
-config2.dir = '/public';
-// config2.name = 'main';
-
-console.log(JSON.stringify(config2, null, '\t'));
-
 gulp.task('scripts', function () {
     return gulp.src('public/javascripts/main.js')
-      .pipe(requirejsOptimize(
-        config2
-       ))
+      .pipe(requirejsOptimize({
+        	"baseUrl": "public/javascripts",
+        	"paths": {
+        		"jquery": "empty:",
+            "marionette": "empty:",
+            "backbone": "empty:",
+            "backbone_radio": "empty:",
+            "handlebars": "empty:",
+            "underscore": "empty:",
+            "socket": "empty:"
+            "text": "empty:"
+        	},
+        	"preserveLicenseComments": true
+        }))
        .pipe(concat('main.build.js'))
        .pipe(gulp.dest('./public/javascripts'));
 });

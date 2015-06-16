@@ -19,6 +19,11 @@
     "marionette": "~2.4.1",
     "jquery-legacy": "jquery#^1",
     "jquery-modern": "jquery#^2",
-    "socket.io-client": "~1.3.5"
+    "socket.io-client": "~1.3.5",
+    "requirejs-text": "~2.0.14",
+    "handlebars": "~3.0.3",
+    "backbone.radio": "~0.9.0",
+    "requirejs-link": "~0.1.1",
+    "bootstrap": "~3.3.4"
   }
 }

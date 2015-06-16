@@ -7,13 +7,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var hbs = require('hbs');
-
-var app = express();
-
+var app = require('./lib/app.js');
 hbs.localsAsTemplateData(app);
-
-app.locals['requirejs-inline-config'] =
-  require('fs').readFileSync('configs/require.config.js', 'utf8');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +20,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+
+
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  console.log(JSON.stringify(req.session, null, "\t"));
+  next();
+});
+
 
 app.use('/', routes);
 app.use('/users', users);

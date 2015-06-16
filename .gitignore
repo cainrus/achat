@@ -28,3 +28,15 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+
+# Bower dependency directory
+public/vendors
+
+# editor
+.idea
+
+# Mac files
+.DS_Store
+
+# Test coverage dir
+coverage

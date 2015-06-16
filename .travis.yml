@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+  - "iojs"
+
+install:
+  - npm install
+
+script: "npm run test-travis"
+after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
