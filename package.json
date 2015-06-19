@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "mocha",
+    "test-travis": "node --harmony istanbul cover _mocha --report lcovonly --hook-run-in-context -- --reporter dot"
   },
   "dependencies": {
     "amd-optimize": "^0.4.3",
