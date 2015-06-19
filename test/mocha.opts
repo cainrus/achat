@@ -1,2 +1,2 @@
 --reporter spec
-lib/*.test.js
+lib/*.js
