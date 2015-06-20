@@ -35,8 +35,5 @@ public/vendors
 # editor
 .idea
 
-# Mac files
-.DS_Store
-
 # Test coverage dir
 coverage

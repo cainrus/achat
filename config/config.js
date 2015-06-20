@@ -1,6 +1,8 @@
-var cc = require('config-chain'),
-    opts = require('optimist').argv,
-    env = opts.env || process.env.ANONYMCHAT_ENV || 'dev';
+'use strict';
+
+var cc = require('config-chain');
+var opts = require('optimist').argv;
+var env = opts.env || process.env.ACHAT_ENV || 'dev';
 
 // https://www.npmjs.com/package/config-chain
 
@@ -13,6 +15,7 @@ var conf = cc(
 
     // defaults.
     {
+        env: env,
         server: {
             port: 3000,
 
