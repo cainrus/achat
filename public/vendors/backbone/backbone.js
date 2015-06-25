@@ -512,6 +512,7 @@
       this._pending = false;
       this._changing = false;
       return this;
+
     },
 
     // Remove an attribute from the model, firing `"change"`. `unset` is a noop

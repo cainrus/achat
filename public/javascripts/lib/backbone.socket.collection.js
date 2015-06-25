@@ -1,6 +1,13 @@
 'use strict';
 
-define(['backbone', 'jquery', 'lib/backbone.socket', 'lib/backbone.socket.sync'], function (Backbone, $, socket, sync) {
+define([
+    'backbone',
+    'jquery',
+    'lib/backbone.socket.model',
+    'lib/backbone.socket',
+    'lib/backbone.socket.sync',
+    'lib/puid.generator'
+], function (Backbone, $, Model, socket, sync, puidGenerator) {
 
     /**
      * Break url apart to create namespace - every '/' save any pre/post-fixing the url will become a ':' indicating
@@ -9,8 +16,9 @@ define(['backbone', 'jquery', 'lib/backbone.socket', 'lib/backbone.socket.sync']
      * will have events on api:posts:21: (ie. api:posts:21:update, api:posts:21:patch, etc.)
      * @param {string=} url
      */
-    var SocketModel = Backbone.Model.extend({
+    var SocketCollection = Backbone.Collection.extend({
         socket: socket,
+        model: Model,
         sync: sync,
         namespace: function (url) {
             url = url || this.url();
@@ -19,13 +27,16 @@ define(['backbone', 'jquery', 'lib/backbone.socket', 'lib/backbone.socket.sync']
                     .replace(/\/*$/, '')
                     .replace('/', ':') + ':';
         },
-        constructor: function () {
-            // Subscribe on socket events.
+        constructor: function (options) {
+            options = options || {};
+            this.cid = options.cid || puidGenerator.generate();
+            // Subscribe on server socket events.
             this.sync('*', this);
-            Backbone.Model.apply(this, arguments);
-        },
+
+            Backbone.Collection.apply(this, arguments);
+        }
 
     });
 
-    return SocketModel;
+    return SocketCollection;
 });

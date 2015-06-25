@@ -9,10 +9,10 @@ requirejs.config({
         "jquery": oldIE ?
           [
             "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery",
-            "../vendors/jquery-legacy/dist/jquery"
+            "../vendors/jquery-legacy/dist/jquery-legacy"
           ] : [
             "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery",
-            "../vendors/jquery-modern/dist/jquery"
+            "../vendors/jquery-modern/dist/jquery-modern"
           ],
         "marionette": [
           "https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.4.1/backbone.marionette.min",

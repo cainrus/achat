@@ -16,22 +16,13 @@ var conf = cc(
     // defaults.
     {
         env: env,
-        server: {
-            port: 3000,
-
-            ssl: {
-                // path/to/file.crt
-                crt: null,
-                // path/to/file.key
-                key: null
-            },
-
-            redis: {
-                port: null,
-                host: null,
-                password: null
-            }
-        }
+        serverPort: 3000,
+        serverSsl: true,
+        serverSslCrt: null, // path/to/file.crt
+        serverSslKey: null, // path/to/file.key
+        redisPort: null,
+        redisHost: null,
+        redisPassword: null
     }
 );
 

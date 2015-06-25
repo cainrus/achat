@@ -1,1 +1,1 @@
-<blockquote class="message{{#if dirty}} dirty{{/if}}">{{text}}</blockquote>
+<blockquote class="message{{#if isDirty}} dirty{{/if}}">{{text}}</blockquote>

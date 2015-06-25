@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /**
  * Module dependencies.
  */
 
 var app = require('../app');
-var debug = require('debug')('anonymchat:server');
+var debug = require('debug')('achat:server');
 var conf = require('../config/config.js');
 var fs = require('fs');
 var socket = require('../lib/socket.js');
@@ -16,16 +18,15 @@ var server;
 /**
  * Get port from environment and store in Express.
  */
-var port = normalizePort(conf.get('port'));
+var port = normalizePort(conf.get('serverPort'));
 app.set('port', port);
 
 /**
  * Create HTTP/HTTPS server.
  */
-var sslOptions = conf.get('server').ssl || {};
-var sslKey = sslOptions.key;
-var sslCrt = sslOptions.crt;
-if (sslKey && sslCrt) {
+if (conf.get('serverSsl')) {
+    var sslCrt = conf.get('serverSslCrt');
+    var sslKey = conf.get('serverSslKey');
     server = https.createServer({
         key: fs.readFileSync(sslKey),
         cert: fs.readFileSync(sslCrt),

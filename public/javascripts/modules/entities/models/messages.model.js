@@ -1,19 +1,19 @@
 'use strict';
 
-
-
 define(['lib/backbone.socket.model', 'underscore'], function(SocketModel, _) {
   var MessagesModel = SocketModel.extend({
     maxLength: 128,
-    urlRoot: 'api/message',
+    url: 'api/messages',
     initialize: function(options) {
 
-      this.on('sync', _.bind(function(){ console.log(1);this.unset('dirty'); }, this));
-      this.on('change:text', _.bind(function(){ this.set('dirty', true); }, this));
+      this.on('sync', _.bind(function () { delete this.isDirty; }, this));
+      this.on('change:text', _.bind(function(){ this.isDirty = true; }, this));
+      this.socket.on('api:clients:join', function(){
+          console.log('api:clients:join');
+      });
     },
     defaults: {
-      text: '',
-      dirty: true
+      text: ""
     },
     validate: function(attrs, options) {
 
