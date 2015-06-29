@@ -10,7 +10,9 @@
     "test-server": "$(npm bin)/mocha --opts .mochaconfig",
     "test-client": "$(npm bin)/karma start --reporters progress",
     "test": "npm run test-client --silent& npm run test-server --silent& wait",
-    "coverall": "$(npm bin)/istanbul report lcovonly && cat ./coverage/lcov.info | $(npm bin)/coveralls"
+    "coverall": "$(npm bin)/istanbul report lcovonly && cat ./coverage/lcov.info | $(npm bin)/coveralls",
+    "postinstall": "$(npm bin)/bower install"
+
   },
   "dependencies": {
     "bluebird": "^2.9.30",
