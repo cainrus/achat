@@ -44,7 +44,7 @@ module.exports = function (config) {
         // Configure the reporter
         coverageReporter: {
             type: 'json',
-            dir: 'coverage/',
+            dir: process.cwd() + '/coverage/',
             subdir: '.',
             file: 'coverage-client.json',
             instrumenterOptions: {

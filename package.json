@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test-cover-server": "$(npm bin)/istanbul cover $(npm bin)/_mocha --report lcovonly --hook-run-in-context  -- --reporter dot --opts .mochaconfig",
+    "test-cover-server": "$(npm bin)/istanbul cover $(npm bin)/_mocha --report lcovonly --hook-run-in-context -x *.test.js -- --reporter dot --opts .mochaconfig",
     "test-cover-client": "$(npm bin)/karma start --reporters progress,coverage",
-    "test-cover": "npm run test-cover-server && npm run test-cover-client && $(npm bin)/istanbul report lcovonly",
+    "test-cover": "npm run test-cover-server && npm run test-cover-client",
     "test-server": "$(npm bin)/mocha --opts .mochaconfig",
     "test-client": "$(npm bin)/karma start --reporters progress",
-    "test": "npm run test-client --silent& npm run test-server --silent& wait"
+    "test": "npm run test-client --silent& npm run test-server --silent& wait",
+    "coverall": "$(npm bin)/istanbul report lcovonly && cat ./coverage/lcov.info | $(npm bin)/coveralls"
   },
   "dependencies": {
     "bluebird": "^2.9.30",
@@ -36,6 +37,7 @@
     "amd-optimize": "^0.4.3",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
+    "coveralls": "^2.11.2",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.5.2",
     "gulp-requirejs-optimize": "^0.1.3",
@@ -48,6 +50,7 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-requirejs": "^0.2.2",
     "mocha": "^2.2.5",
+    "mocha-lcov-reporter": "0.0.2",
     "phantomjs": "^1.9.17",
     "require-stub": "^2.2.4",
     "requirejs": "^2.1.18",
