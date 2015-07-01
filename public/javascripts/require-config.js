@@ -6,31 +6,31 @@ requirejs.config({
     baseUrl: 'javascripts',
 
     paths: {
-        "jquery": oldIE ?
+        jquery: oldIE ?
           [
-            "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery",
-            "../vendors/jquery-legacy/dist/jquery-legacy"
+            'https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery',
+            '../vendors/jquery-legacy/dist/jquery-legacy'
           ] : [
-            "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery",
-            "../vendors/jquery-modern/dist/jquery-modern"
+            'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery',
+            '../vendors/jquery-modern/dist/jquery-modern'
           ],
-        "marionette": [
-          "https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.4.1/backbone.marionette.min",
-          "../vendors/marionette/lib/backbone.marionette"
+        marionette: [
+          'https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.4.1/backbone.marionette.min',
+          '../vendors/marionette/lib/backbone.marionette'
           ],
-        "underscore": [
-          "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min",
-          "../vendors/underscore/underscore"
+        underscore: [
+          'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min',
+          '../vendors/underscore/underscore'
         ],
-        "backbone": [
-          "https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min",
-          "../vendors/backbone/backbone"
+        backbone: [
+          'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min',
+          '../vendors/backbone/backbone'
         ],
-        "socket": [
-          "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min",
-          "../vendors/socket.io-client/socket.io"
+        socket: [
+          'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min',
+          '../vendors/socket.io-client/socket.io'
         ],
-        "handlebars": [
+        handlebars: [
           'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min',
           '../vendors/handlebars/handlebars.min'
         ],
@@ -43,12 +43,12 @@ requirejs.config({
           '../vendors/backbone.radio/build/backbone.radio.min'
         ],
 
-        "radio": "./lib/radio",
-        "text": [
+        radio: './lib/radio',
+        text: [
           'https://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text',
           '../vendors/requirejs-text/text'
         ],
-        "link": [
+        link: [
             '../vendors/requirejs-link/link'
         ]
     },

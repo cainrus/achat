@@ -10,16 +10,21 @@ define(['backbone', 'jquery', 'underscore'], function (Backbone, $, _, Model, Co
         throw new Error('A "method" argument(`' + argument + '`) must be one of: `' + ['*'].concat(methods).join(', ') + '`.');
     };
 
-    var socketMethodListenError = function() {
+    var socketMethodListenError = function () {
         throw new Error('Unimplemented method error.');
     };
 
     var methods = ['create', 'read', 'update', 'delete', 'patch'];
-
+    var subscribedModels = [];
     /**
      * Additional sync method with websocket/socket.io based solution.
+     * Model and collections can sync events with
      */
     var sync = function (method, model, options) {
+
+        var isCollection = model instanceof Backbone.Collection;
+        var isModel = model instanceof Backbone.Model;
+
         if (['*'].concat(methods).indexOf(method) === -1) {
             methodError(method);
         }
@@ -47,32 +52,17 @@ define(['backbone', 'jquery', 'underscore'], function (Backbone, $, _, Model, Co
 
         // Subscribe on server events.
         if (method === '*') {
-            _.each(methods, function (method) {
-                socket.on(namespace + method, function (res) {
+            if (subscribedModels.indexOf(model) === -1) {
+                subscribedModels.push(model);
+                _.map(['create', 'update', 'delete', 'patch'], function (method) {
+                    socket.on(namespace + method, function (res) {
+                        model.trigger(namespace + method, res);
 
-                    var attributes = res;
-
-                    switch (method) {
-                        case 'create':
-                            collection.create(attributes, {skipRequest: true, attributes: attributes});
-                            break;
-                        case 'update':
-                            model.clear({silent: true});
-                            /* fall through */
-                        case 'patch':
-                            model.save(attributes, {skipRequest: true, attributes: attributes});
-                            break;
-                        case 'delete':
-                            model.collection.remove(model, {skipRequest: true});
-                            break;
-                        default:
-                            socketMethodListenError();
-                    }
+                    });
                 });
-            });
-            return true;
+            }
+            return;
         }
-
 
         // Determine what data we're sending, and ensure id is present if we're performing a PATCH call
         if (!opts.data && model) {
@@ -92,16 +82,18 @@ define(['backbone', 'jquery', 'underscore'], function (Backbone, $, _, Model, Co
 
         // Add a listener for our namespaced method, and resolve or reject our deferred based on the response
 
-        var id = model.get('id') || model.cid;
+        // collection artificial id or normal model id.
+        var id = model.id || model.get('id');
         var eventName = namespace + id + ':' + method;
+
         socket.once(eventName, function (res) {
-            var success = !(res && res.error);
+            var success = res && res.success;
 
             if (success) {
                 successCallback(res);
             } else {
                 if (_.isFunction(options.error)) {
-                    options.error('error' in res && res || {error: 'server error'});
+                    options.error(_.extend({error: 'server error'}, res));
                 }
                 defer.reject(res);
             }

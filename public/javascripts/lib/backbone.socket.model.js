@@ -19,11 +19,11 @@ define(['backbone', 'jquery', 'lib/backbone.socket', 'lib/backbone.socket.sync']
                     .replace(/\/*$/, '')
                     .replace('/', ':') + ':';
         },
-        constructor: function () {
-            // Subscribe on socket events.
+        initialize: function() {
+            this.attributes.id = '0' + this.cid;
             this.sync('*', this);
-            Backbone.Model.apply(this, arguments);
         },
+        comparator: 'id'
 
     });
 

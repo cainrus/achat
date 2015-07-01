@@ -27,13 +27,10 @@ define([
                     .replace(/\/*$/, '')
                     .replace('/', ':') + ':';
         },
-        constructor: function (options) {
-            options = options || {};
-            this.cid = options.cid || puidGenerator.generate();
+        initialize: function (options) {
+            this.id = puidGenerator.generate();
             // Subscribe on server socket events.
             this.sync('*', this);
-
-            Backbone.Collection.apply(this, arguments);
         }
 
     });
