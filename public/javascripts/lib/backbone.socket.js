@@ -84,6 +84,4 @@ define(['socket', 'underscore'], function (io, _) {
             socket.emit.apply(socket, arguments);
         }
     };
-
-
 });

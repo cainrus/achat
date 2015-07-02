@@ -27,10 +27,18 @@ define([
                     .replace(/\/*$/, '')
                     .replace('/', ':') + ':';
         },
+
         initialize: function (options) {
             this.id = puidGenerator.generate();
             // Subscribe on server socket events.
-            this.sync('*', this);
+            this.sync('subscribe', this);
+        },
+
+        dispose: function () {
+            // remove model-socket bindings.
+            this.sync('unsubscribe', this);
+            // remove models bindings.
+            this.off(null, null, this);
         }
 
     });

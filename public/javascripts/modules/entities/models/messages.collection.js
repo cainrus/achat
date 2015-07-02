@@ -8,7 +8,9 @@ define(['lib/backbone.socket.collection', 'underscore'], function (SocketCollect
             return res.data;
         },
         initialize: function () {
-
+            // me emit api:messages:create {cid: cid, text: text}
+            // me receive api:messages:update {id: id, text: text, timestamp: timestamp}
+            // others receive api:
             this.on('api:messages:create', function (res) {
                 _.each(res.data.messages, function (message) {
                     var model = this.create(message, {

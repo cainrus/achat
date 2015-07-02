@@ -17,14 +17,20 @@ define(['backbone', 'jquery', 'lib/backbone.socket', 'lib/backbone.socket.sync']
             return url
                     .replace(/^\/*/, '')
                     .replace(/\/*$/, '')
-                    .replace('/', ':') + ':';
+                    .replace(/\//g, ':') + ':';
         },
-        initialize: function() {
+        initialize: function () {
             this.attributes.id = '0' + this.cid;
-            this.sync('*', this);
+            this.sync('subscribe', this);
         },
-        comparator: 'id'
-
+        comparator: 'id',
+        dispose: function () {
+            this.remove();
+            // remove model-socket bindings.
+            this.sync('unsubscribe', this);
+            // remove models bindings.
+            this.off(null, null, this);
+        }
     });
 
     return SocketModel;
